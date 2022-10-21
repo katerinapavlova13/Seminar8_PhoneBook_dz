@@ -37,13 +37,19 @@ def main_menu():
                 break
 
 
+#начало работы
+def begin_of_work():
+    open_book()       #открываем файл
+    View.print_file()  #печатаем
+    main_menu()         #выводим главное меню
+
 #открытие файла с контактами
 def open_book():
     with open(Model.path, 'r', encoding='UTF_8') as file:
         contacts = file.read().split('\n')
         Model.phone_book = contacts
 
-#сохранение контакта
+#записать файл с контактами
 def save_contact():
     with open(Model.path, 'w', encoding='UTF_8') as file:
         file.write('\n'.join(Model.phone_book))
@@ -51,20 +57,26 @@ def save_contact():
 # добавление нового контакта
 def add_contact():
     index_cont = int(input('Введите индекс контакта: '))
-    name = input('')
-    surname = input('')
-    patronymic = input('')
-    phone = input('')
-    comment = input('')
+    name = input('Введите имя: ')
+    surname = input('Введите фамилию: ')
+    patronymic = input('Введите отчество: ')
+    phone = input('Введите номер телефона: ')
+    comment = input('Введите комментарий')
     contact = f'{index_cont}; {name}; {surname}; {patronymic}; {phone}; {comment}'
-    Model.phone_book.append(contact)
+    Model.phone_book.append(contact) #производим запись нового контакта в книгу
     View.print_file()
 
 # изменение имеющегося контакта
 def change_contact():
+    choice_index = input('Введите номер контакта для изменения: ')
+
 
 # удаление контакта
 def delete_contact():
+    choice_index = input('Введите номер контакта для удаления: ')
+    Model.phone_book.pop(choice_index) #попом удаляем контакт с выбраным индексом из книги
+    View.print_file()
+
 
 # поиск контакта
 def search_by_contact():
