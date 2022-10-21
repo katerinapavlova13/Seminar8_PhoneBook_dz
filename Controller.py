@@ -1,8 +1,6 @@
 import View
 import Model
 
-
-
 def main_menu():
     while True:
         print(  'Главное меню: \n'
@@ -16,11 +14,12 @@ def main_menu():
         choice = int(input('Выберите действие: '))
         match (choice):
             case 1:
-                print('Файл с контактами открыт \n')
                 open_book()
+                print('Файл с контактами открыт \n')
             case 2:
-                print('Контакт сохранен \n')
                 save_contact()
+                print('Контакт сохранен \n')
+
             case 3:
                 add_contact()
                 print('Контакт добавлен\n')
@@ -36,24 +35,36 @@ def main_menu():
             case 0:
                 print('Конец работы\n')
                 break
-main_menu()
 
+
+#открытие файла с контактами
 def open_book():
     with open(Model.path, 'r', encoding='UTF_8') as file:
         contacts = file.read().split('\n')
         Model.phone_book = contacts
-#
+
+#сохранение контакта
 def save_contact():
     with open(Model.path, 'w', encoding='UTF_8') as file:
         file.write('\n'.join(Model.phone_book))
 
+# добавление нового контакта
 def add_contact():
-    
+    index_cont = int(input('Введите индекс контакта: '))
+    name = input('')
+    surname = input('')
+    patronymic = input('')
+    phone = input('')
+    comment = input('')
+    contact = f'{index_cont}; {name}; {surname}; {patronymic}; {phone}; {comment}'
+    Model.phone_book.append(contact)
+    View.print_file()
 
+# изменение имеющегося контакта
 def change_contact():
 
-
+# удаление контакта
 def delete_contact():
 
-
+# поиск контакта
 def search_by_contact():
