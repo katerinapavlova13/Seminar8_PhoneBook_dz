@@ -1,3 +1,3 @@
 import Controller
 
-Controller.start()
+Controller.begin_of_work()
