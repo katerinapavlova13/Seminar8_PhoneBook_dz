@@ -7,6 +7,7 @@ def begin_of_work():
 def print_file():
     for item in Model.phone_book:
         print(item)
+
 def open_book():
     with open(Model.path, 'r', encoding='UTF_8') as file:
         contacts = file.read().split('\n')
@@ -17,6 +18,10 @@ def save_contact():
         file.write('\n'.join(Model.phone_book))
 
 def add_new_contact():
+    print('==============================================================')
+    open_book()
+    print_file()
+    print('==============================================================')
     id_cont = int(input('Введите id для нового контакта: '))
     name = input('Введите имя: ')
     surname = input('Введите фамилию: ')
@@ -25,11 +30,13 @@ def add_new_contact():
     comment = input('Введите комментарий: ')
     contact = f'{id_cont}; {name}; {surname}; {patronymic}; {phone}; {comment}'
     Model.phone_book.append(contact)
-    View.print_file()
+    print_file()
 
 def change_contact():
+    print('==============================================================')
     open_book()
-    View.print_file()
+    print_file()
+    print('==============================================================')
     choice_id = int(input('Введите id контакта, который хотите изменить: '))
     contact = Model.phone_book.pop(choice_id).split('; ')
     print(contact)
@@ -42,15 +49,16 @@ def change_contact():
     Model.phone_book.insert(choice, ';'.join(contact))
 
 def delete_contact():
+    print('==============================================================')
     open_book()
-    View.print_file()
+    print_file()
+    print('==============================================================')
     choice_id = int(input('Введите id контакта для удаления: '))
     Model.phone_book.pop(choice_id)
-    View.print_file()
+    print_file()
 
 def search_by_contact():
     open_book()
-
     choice_id = int(input('Введите id контакта, который хотите найти: '))
     contact = Model.phone_book.pop(choice_id)
     print(contact)
